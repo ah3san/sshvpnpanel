@@ -1,0 +1,30 @@
+# SSH VPN Panel - Git Ignore
+
+# Runtime generated files
+logs/*.log
+logs/*.log.*
+backups/backup_*.tar.gz
+backups/backup_*.tar.gz.enc
+
+# Sensitive runtime data (created during installation)
+/etc/sshvpnpanel/
+
+# Temporary files
+/tmp/sshvpnpanel/
+*.tmp
+*.tmp.*
+
+# Editor backup files
+*.bak
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V8
+.Trashes
+ehthumbs.db
+Thumbs.db
