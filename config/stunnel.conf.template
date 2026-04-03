@@ -1,0 +1,42 @@
+################################################################################
+# SSH VPN Panel - Stunnel Configuration Template
+# This template is used when generating user-specific stunnel configurations
+# Variables in {{VARIABLE}} format are replaced at runtime
+################################################################################
+
+# Global stunnel options
+pid = /var/run/stunnel4/stunnel.pid
+output = /var/log/stunnel4/stunnel.log
+socket = l:TCP_NODELAY=1
+socket = r:TCP_NODELAY=1
+setuid = stunnel4
+setgid = stunnel4
+fips = no
+
+# Security settings
+sslVersion = TLSv1.2
+ciphers = ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256
+options = NO_SSLv2
+options = NO_SSLv3
+options = NO_TLSv1
+options = NO_TLSv1.1
+
+# Server mode configuration - wraps SSH connections with TLS
+[ssh-tls]
+accept = {{STUNNEL_ACCEPT_PORT}}
+connect = 127.0.0.1:{{SSH_PORT}}
+cert = {{CERT_FILE}}
+key = {{KEY_FILE}}
+CAfile = {{CA_FILE}}
+verify = 0
+transparent = source
+# SNI-based routing
+sni = {{SNI_DOMAIN}}:{{STUNNEL_ACCEPT_PORT}}
+
+# Optional: WebSocket over TLS support
+[ssh-websocket]
+accept = {{WS_PORT}}
+connect = 127.0.0.1:{{SSH_PORT}}
+cert = {{CERT_FILE}}
+key = {{KEY_FILE}}
+verify = 0
