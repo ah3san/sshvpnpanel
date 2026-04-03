@@ -1,0 +1,16 @@
+# Ignore runtime generated files
+logs/*.log
+backups/
+!backups/.gitkeep
+
+# Config with sensitive data overrides
+/etc/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor temporary files
+*.swp
+*.swo
+*~
